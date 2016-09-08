@@ -72,6 +72,8 @@ if (!process.env.token) {
 var Botkit = require('./lib/Botkit.js');
 var os = require('os');
 
+var w2v = require( 'word2vec' );
+
 var controller = Botkit.slackbot({
     debug: true
 });
