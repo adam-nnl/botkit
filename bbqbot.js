@@ -145,7 +145,7 @@ function privateConvo(bot, message) {
   };
 }
 
-hears(['rpc'], 'direct_message,direct_mention,mention', (bot, message) => {
+hears(['rps'], 'direct_message,direct_mention,mention', (bot, message) => {
   const { user, channel, text } = message;
   const userData = text.match(/<@([A-Z0-9]{9})>/);
 
