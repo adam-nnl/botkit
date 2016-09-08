@@ -18,8 +18,9 @@ This bot demonstrates many of the core features of Botkit:
   for a user.
 
 And also cool shit like-
-* Natural language processing(NLP)
-* Google Custom Search
+* Natural language processing(word2vec)
+* Google Custom Search? Regular lmgtfy for now
+* ROCK PAPER SCISSORS!
 
 # RUN THE BOT:
   Run your bot from the command line:
@@ -44,15 +45,13 @@ And also cool shit like-
   Say: "who am I?"
   The bot will tell you your nickname, if it knows one for you.
 
-  Say: "shutdown"
-  The bot will ask if you are sure, and then shut itself down.
+  Say: "rpc @username"
+  will kick off a rousing game of Rock, Paper, Scissors
+  
+  Say: "@botname google <search_terms>" or "@botname search <search_terms>" or DM bot "search/google <serach_terms>"
+  runs quick google search and replies with URL link
 
   Make sure to invite your bot into other channels using /invite @<my bot>!
-
-# EXTEND THE BOT:
-  Botkit has many features for building cool and useful bots!
-  Read all about it here:
-    -> http://howdy.ai/botkit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
@@ -309,33 +308,6 @@ controller.hears(['what is my name', 'who am i'], 'direct_message,direct_mention
     });
 });
 
-
-controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function(bot, message) {
-
-    bot.startConversation(message, function(err, convo) {
-
-        convo.ask('Are you sure you want me to shutdown?', [
-            {
-                pattern: bot.utterances.yes,
-                callback: function(response, convo) {
-                    convo.say('Bye!');
-                    convo.next();
-                    setTimeout(function() {
-                        process.exit();
-                    }, 3000);
-                }
-            },
-        {
-            pattern: bot.utterances.no,
-            default: true,
-            callback: function(response, convo) {
-                convo.say('*Phew!*');
-                convo.next();
-            }
-        }
-        ]);
-    });
-});
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention', function(bot, message) {
