@@ -208,13 +208,11 @@ controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function
     });
 });
 
-controller.hears('google (.*)','direct_message,direct_mention,mention',function(bot,message) {
-  var query = message.match[1]; 
+controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
+    var query = message.match[1];
     var search_str = require('querystring').escape(query);
-        bot.reply(message,
-            ':mag: Let me Google that for you!- ' + 'https://www.google.com/?#q=' + search_str );
-
-    });
+        bot.reply(message,':mag: Let me Google that for you!- ' + 'https://www.google.com/?#q=' + search_str );
+});
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention', function(bot, message) {
