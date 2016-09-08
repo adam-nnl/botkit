@@ -216,6 +216,13 @@ controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function
     });
 });
 
+controller.hears(['google', 'search', 'google', 'lmgtfy'],
+    'direct_message,direct_mention,mention', function(bot, message) {
+    var search_str = require('querystring').escape(message.text);
+        bot.reply(message,
+            ':mag: Let me Google that for you!- ' + 'https://www.google.com/?#q=' + search_str );
+
+    });
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
     'direct_message,direct_mention,mention', function(bot, message) {
