@@ -74,6 +74,11 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
+controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
+    var query = message.match[1];
+    var search_str = require('querystring').escape(query);
+        bot.reply(message,':mag: Let me Google that for you!- ' + 'https://www.google.com/?#q=' + search_str );
+});
 
 controller.hears(['hello', 'hi'], 'direct_message,direct_mention,mention', function(bot, message) {
 
@@ -206,12 +211,6 @@ controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function
         }
         ]);
     });
-});
-
-controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
-    var query = message.match[1];
-    var search_str = require('querystring').escape(query);
-        bot.reply(message,':mag: Let me Google that for you!- ' + 'https://www.google.com/?#q=' + search_str );
 });
 
 controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your name'],
