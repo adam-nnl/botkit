@@ -208,7 +208,7 @@ controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function
     });
 });
 
-controller.hears('google (.*)',['message_received'],function(bot,message) {
+controller.hears('google (.*)','direct_message,direct_mention,mention',function(bot,message) {
   var query = message.match[1]; 
     var search_str = require('querystring').escape(query);
         bot.reply(message,
