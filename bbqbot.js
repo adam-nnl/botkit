@@ -75,22 +75,7 @@ var bot = controller.spawn({
 
 controller.hears(['word2vec'],'direct_message', function(bot, message) {
 
-    var word2vec = require('word2vec.js');
-    var analyzer = word2vec.analyzer('./GoogleNews-vectors-negative300.bin');
- 
-    // Find Word's Vector 
-    var king = analyzer.findVec('berlin');
-    var man = analyzer.findVec('germany');
-    var woman = analyzer.findVec('korea');
- 
-    // Vector Operation 
-    var op = analyzer.operator.sub(king, man);
-    op = analyzer.operator.sum(op, woman);
- 
-    // Find Cousins 
-    var cousins = analyzer.findCousin(op, 10);
-    //console.log(cousins);
-    bot.reply(message,':robot_face: I am a bot named <@' + cousins);
+    bot.reply(message,'still figuring it out :/');
 
     });
 
