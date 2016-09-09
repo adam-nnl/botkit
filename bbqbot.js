@@ -73,6 +73,17 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
+controller.hears(['word2vec'],'direct_message', function(bot, message) {
+
+    w2v.loadModel( './vectors.txt', function( error, model ) {
+    console.log( model );
+    bot.reply(message,model);
+    });
+
+        //bot.reply(message,':robot_face: I am a bot named <@');
+
+    });
+
 controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
     var query = message.match[1];
     var search_str = require('querystring').escape(query);
