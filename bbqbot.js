@@ -75,7 +75,7 @@ var bot = controller.spawn({
 
 controller.hears(['word2vec'],'direct_message', function(bot, message) {
 
-    w2v.loadModel( './vectors.txt', function( error, model ) {
+    w2v.loadModel( './GoogleNews-vectors-negative300.bin', function( error, model ) {
     console.log( model );
     bot.reply(message,model);
     });
