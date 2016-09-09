@@ -76,7 +76,7 @@ var bot = controller.spawn({
 controller.hears(['word2vec'],'direct_message', function(bot, message) {
 
     var word2vec = require('word2vec.js');
-    var analyzer = word2vec.analyzer('./vector.txt');
+    var analyzer = word2vec.analyzer('./GoogleNews-vectors-negative300.bin');
  
     // Find Word's Vector 
     var king = analyzer.findVec('berlin');
