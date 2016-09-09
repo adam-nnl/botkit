@@ -53,7 +53,21 @@ And also cool shit like-
 
   Make sure to invite your bot into other channels using /invite @<my bot>!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+var word2vec = require('word2vec.js');
 
+word2vec.trainer({
+    train: './data/text8',
+    output: 'vector.txt',
+    on: function (log) {
+        process.stdout.write(log);
+    },
+    done: function () {
+        console.log('finish');
+    },
+    error: function (err) {
+        console.log(err);
+    }
+});
 
 if (!process.env.token) {
     console.log('Error: Specify token in environment');
@@ -74,8 +88,22 @@ var bot = controller.spawn({
 }).startRTM();
 
 controller.hears(['word2vec'],'direct_message', function(bot, message) {
+var word2vec = require('word2vec.js');
+var analyzer = word2vec.analyzer('./vector.txt');
 
-    bot.reply(message,'still figuring it out :/');
+// Find Word's Vector
+var king = analyzer.findVec('berlin');
+var man = analyzer.findVec('germany');
+var woman = analyzer.findVec('korea');
+
+// Vector Operation
+var op = analyzer.operator.sub(king, man);
+op = analyzer.operator.sum(op, woman);
+
+// Find Cousins
+var cousins = analyzer.findCousin(op, 10);
+//console.log(cousins);
+    bot.reply(message,cousins);
 
     });
 
