@@ -62,8 +62,6 @@ if (!process.env.token) {
 var Botkit = require('./lib/Botkit.js');
 var os = require('os');
 
-//var w2v = require( 'word2vec' );
-
 var controller = Botkit.slackbot({
     debug: true
 });
@@ -72,10 +70,31 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 
-controller.hears(['word2vec'],'direct_message', function(bot, message) {
-    bot.reply(message,'still working on this piece....');
+controller.hears(['meow meow', 'cat facts', 'tell me a cat fact'],'direct_message,direct_mention,mention', function(bot, message) {
+    var request = require("request")
 
-    });
+    var url = "http://catfacts-api.appspot.com/api/facts?number=1"
+
+    request({
+        url: url,
+        json: true
+    }, function (error, response, body) {
+
+    if (!error && response.statusCode === 200) {
+        //console.log(body) // Print the json response
+        bot.reply(message,body.facts[0]+ ':smile_cat:');
+    }
+    })
+
+});
+
+controller.hears(['fuck everyone', 'fuck you all'], 'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message, 'http://foaas.com/everyone/' + bot.identity.name);
+});
+
+controller.hears(['fuck you'], 'direct_message,direct_mention,mention', function(bot, message) {
+    bot.reply(message, 'http://foaas.com/you/' + user.name + '/' + bot.identity.name);
+});
 
 controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
     var query = message.match[1];
