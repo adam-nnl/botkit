@@ -114,6 +114,22 @@ controller.hears(['fuck you'], 'direct_message,direct_mention,mention', function
     })    
 });
 
+controller.hears(['secret fu'],'direct_message', function(bot, message) {
+    const { user, channel, text } = message;
+    const userData = text.match(/<@([A-Z0-9]{9})>/);
+    bot.startPrivateConversation(userData, function(response, convo){
+        convo.say('Hello, I am your bot.')
+    });
+});
+
+controller.hears(['secret hug'],'direct_message', function(bot, message) {
+    const { user, channel, text } = message;
+    const userData = text.match(/<@([A-Z0-9]{9})>/);
+    bot.startPrivateConversation(userData, function(response, convo){
+        convo.say('Hello, I am your bot.')
+    });
+});
+
 controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
     var query = message.match[1];
     var search_str = require('querystring').escape(query);
