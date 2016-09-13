@@ -9,7 +9,6 @@
 This is a Slack bot built with Botkit.
 
 This bot demonstrates many of the core features of Botkit:
-
 * Connect to Slack using the real time API
 * Receive messages based on "spoken" patterns
 * Reply to messages
@@ -17,10 +16,12 @@ This bot demonstrates many of the core features of Botkit:
 * Use the built in storage system to store and retrieve information
   for a user.
 
-And also cool shit like-
-* Natural language processing(word2vec)
+And also extra cool shit like-
+* Natural language processing(js natural nlp...soon,maybe)
 * Google Custom Search? Regular lmgtfy for now
 * ROCK PAPER SCISSORS!
+* Fuck Off As A Service
+* Cat Facts!
 
 # RUN THE BOT:
   Run your bot from the command line:
@@ -51,7 +52,6 @@ And also cool shit like-
   Say: "@botname google <search_terms>" or "@botname search <search_terms>" or DM bot "search/google <serach_terms>"
   runs quick google search and replies with URL link
 
-  Make sure to invite your bot into other channels using /invite @<my bot>!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 if (!process.env.token) {
@@ -72,7 +72,6 @@ var bot = controller.spawn({
 
 controller.hears(['meow meow', 'cat facts', 'tell me a cat fact'],'direct_message,direct_mention,mention', function(bot, message) {
     var request = require("request")
-
     var url = "http://catfacts-api.appspot.com/api/facts?number=1"
 
     request({
@@ -85,7 +84,6 @@ controller.hears(['meow meow', 'cat facts', 'tell me a cat fact'],'direct_messag
         bot.reply(message,body.facts[0]+ ':smile_cat:');
     }
     })
-
 });
 
 controller.hears(['fuck everyone', 'fuck you all'], 'direct_message,direct_mention,mention', function(bot, message) {
@@ -97,7 +95,6 @@ controller.hears(['fuck you'], 'direct_message,direct_mention,mention', function
         let {name, real_name} = response.user;
         bot.reply(message, 'http://foaas.com/you/' + name + '/' + bot.identity.name);
     })    
-   
 });
 
 controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
@@ -196,7 +193,7 @@ hears(['rps'], 'direct_message,direct_mention,mention', (bot, message) => {
       if (err) throw err;
 
       bot.say({
-        text: `<@${playerTwo}> you've been challenged to a game of ROCK PAPER SCISSORS by <@${user}>,  say \`accept\` unless you're too scared.`,
+        text: `<@${playerTwo}> you've been challenged to a game of ROCK:mountain: PAPER:spiral_note_pad: SCISSORS:scissors: by <@${user}>,  say \`accept\` unless you're chicken :chicken:`,
         channel,
       });
 
@@ -218,7 +215,7 @@ hears(['accept'], 'ambient', (bot, message) => {
       const { players } = data;
 
       if (user in players && !players[user].accepted) {
-        bot.reply(message, 'GREAT, LET THE BATTLE BEGIN!!!');
+        bot.reply(message, 'GREAT, LET THE BATTLE BEGIN!!! :mountain::spiral_note_pad::scissors:');
 
         bot.startPrivateConversation(message, privateConvo(bot, message));
       } else {
