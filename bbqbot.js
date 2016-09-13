@@ -93,7 +93,7 @@ controller.hears(['fuck everyone', 'fuck you all'], 'direct_message,direct_menti
 });
 
 controller.hears(['fuck you'], 'direct_message,direct_mention,mention', function(bot, message) {
-    bot.reply(message, 'http://foaas.com/you/' + user.name + '/' + bot.identity.name);
+    bot.reply(message, 'http://foaas.com/you/' + message.user.name + '/' + bot.identity.name);
 });
 
 controller.hears(['google (.*)', 'search (.*)'], 'direct_message,direct_mention,mention', function(bot, message) {
