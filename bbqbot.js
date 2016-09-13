@@ -95,7 +95,7 @@ controller.hears(['fuck everyone', 'fuck you all'], 'direct_message,direct_menti
 controller.hears(['fuck you'], 'direct_message,direct_mention,mention', function(bot, message) {
     bot.api.users.info({user: message.user}, (error, response) => {
         let {name, real_name} = response.user;
-        bot.reply(message, 'http://foaas.com/you/' + real_name + '/' + bot.identity.name);
+        bot.reply(message, 'http://foaas.com/you/' + name + '/' + bot.identity.name);
     })    
    
 });
